@@ -1,0 +1,303 @@
+{
+	"pages": [
+		{
+			"path": "pages/scene/scene",
+			"style": {
+				"navigationBarTitleText": "案件",
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": true,
+				"navigationBarBackgroundColor":"#03198D"
+			}
+		},
+		{
+			"path": "pages/cheaterAdd/cheaterAdd",
+			"style": {
+				"navigationBarTitleText": "添加骗子",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor":"#03198D"
+			}
+		},
+		
+		{
+			"path": "pages/sceneDetail/sceneDetail",
+			"style": {
+				"navigationBarTitleText": "案件详情",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor":"#03198D"
+			}
+		},
+		{
+			"path":"pages/userzoom/userzoom",
+			"style": {
+				"navigationBarTitleText": "我的",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor":"#03198D"
+			}
+		},
+		{
+			"path":"pages/experience/experience",
+			"style": {
+				"navigationBarTitleText": "经历",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor":"#03198D"
+			}
+		},
+		{
+			"path": "pages/cheater/cheater",
+			"style": {
+				"navigationBarTitleText": "骗子列表",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor":"#03198D"
+			}
+		},
+		
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor":"#03198D"
+			}
+		},
+		
+		
+		{
+			"path": "pages/index/index",
+			"style": {
+				// #ifdef MP 
+				"navigationBarTitleText": "Dloud商城",
+				//"navigationStyle": "custom",
+				// #endif 
+				"app-plus": {
+					"titleNView": {
+						"type": "transparent",
+						"searchInput": {
+							"backgroundColor": "rgba(231, 231, 231,.7)",
+							"borderRadius": "16px",
+							"placeholder": "请输入地址 如：大钟寺",
+							"disabled": true,
+							"placeholderColor": "#606266"
+						},
+						"buttons": [{
+								"fontSrc": "/static/yticon.ttf",
+								"text": "\ue60d",
+								"fontSize": "26",
+								"color": "#303133",
+								"float": "left",
+								"background": "rgba(0,0,0,0)"
+							},
+							{
+								"fontSrc": "/static/yticon.ttf",
+								"text": "\ue744",
+								"fontSize": "27",
+								"color": "#303133",
+								"background": "rgba(0,0,0,0)",
+								"redDot": true
+							}
+						]
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/public/login",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom",
+				"app-plus": {
+					"titleNView": false,
+					"animationType": "slide-in-bottom"
+				}
+			}
+		},
+		{
+			"path": "pages/product/product",
+			"style": {
+				"navigationBarTitleText": "详情展示",
+				"app-plus": {
+					"titleNView": {
+						"type": "transparent"
+					}
+				}
+			}
+		}, {
+			"path": "pages/set/set",
+			"style": {
+				"navigationBarTitleText": "设置"
+			}
+		},
+
+		{
+			"path": "pages/userinfo/userinfo",
+			"style": {
+				"navigationBarTitleText": "修改资料"
+			}
+		}, {
+			"path": "pages/cart/cart",
+			"style": {
+				"navigationBarTitleText": "购物车"
+			}
+		}, {
+			"path": "pages/user/user",
+			"style": {
+				"navigationBarTitleText": "我的",
+				// #ifdef MP
+				"navigationStyle": "custom",
+				// #endif
+				"app-plus": {
+					"bounce": "none",
+					"titleNView": {
+						"type": "transparent",
+						"buttons": [{
+								"fontSrc": "/static/yticon.ttf",
+								"text": "\ue60f",
+								"fontSize": "24",
+								"color": "#303133",
+								"width": "46px",
+								"background": "rgba(0,0,0,0)"
+							},
+							{
+								"fontSrc": "/static/yticon.ttf",
+								"text": "\ue744",
+								"fontSize": "28",
+								"color": "#303133",
+								"background": "rgba(0,0,0,0)",
+								"redDot": true
+							}
+						]
+					}
+				}
+			}
+		}, {
+			"path": "pages/detail/detail",
+			"style": {
+				"navigationBarTitleText": "",
+				"app-plus": {
+					"titleNView": {
+						"type": "transparent"
+					}
+				}
+			}
+		}, {
+			"path": "pages/order/order",
+			"style": {
+				"navigationBarTitleText": "我的订单",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/money/money",
+			"style": {}
+		}, {
+			"path": "pages/order/createOrder",
+			"style": {
+				"navigationBarTitleText": "创建订单"
+			}
+		}, {
+			"path": "pages/address/address",
+			"style": {
+				"navigationBarTitleText": "收货地址"
+			}
+		}, {
+			"path": "pages/address/addressManage",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		}, {
+			"path": "pages/money/pay",
+			"style": {
+				"navigationBarTitleText": "支付"
+			}
+		},
+		{
+			"path": "pages/money/paySuccess",
+			"style": {
+				"navigationBarTitleText": "支付成功"
+			}
+		}, {
+			"path": "pages/notice/notice",
+			"style": {
+				"navigationBarTitleText": "通知"
+			}
+		}, {
+			"path": "pages/category/category",
+			"style": {
+				"navigationBarTitleText": "分类",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/product/list",
+			"style": {
+				"enablePullDownRefresh": true,
+				"navigationBarTitleText": "商品列表"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#FFFFFF",
+		"backgroundColor": "#f8f8f8"
+	},
+	"tabBar": {
+		"color": "#aeb2ba",
+		"selectedColor": "#03198D",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [
+			
+			{
+				"pagePath": "pages/scene/scene", 
+				"iconPath": "static/img/icon_scene.png",
+				"selectedIconPath": "static/img/icon_scene_active.png",
+				"text": "案件列表"
+			},
+			{
+				"pagePath": "pages/cheater/cheater",
+				"iconPath": "static/img/icon_cheater.png",
+				"selectedIconPath": "static/img/icon_cheater_active.png",
+				"text": "骗子们"
+			},
+			{
+				"pagePath": "pages/experience/experience", 
+				"iconPath": "static/img/icon_experience.png",
+				"selectedIconPath": "static/img/icon_experience_active.png",
+				"text": "经历"
+			},
+			{
+				"pagePath": "pages/userzoom/userzoom", 
+				"iconPath": "static/img/icon_user.png",
+				"selectedIconPath": "static/img/icon_user_active.png",
+				"text": "我的"
+			}
+			/* {
+				"pagePath": "pages/cheaterAdd/cheaterAdd", 
+				"iconPath": "static/img/icon_user.png",
+				"selectedIconPath": "static/img/icon_user_active.png",
+				"text": "添加骗子"
+			} */
+			//,
+			/* {
+				"pagePath": "pages/index/index",
+				"iconPath": "static/tab-home.png",
+				"selectedIconPath": "static/tab-home-current.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/cart/cart",
+				"iconPath": "static/tab-cart.png",
+				"selectedIconPath": "static/tab-cart-current.png",
+				"text": "购物车"
+			} ,
+			{
+				"pagePath": "pages/user/user",
+				"iconPath": "static/tab-my.png",
+				"selectedIconPath": "static/tab-my-current.png",
+				"text": "我的"
+			}*/
+		]
+	}
+}
