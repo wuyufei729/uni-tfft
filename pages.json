@@ -1,13 +1,5 @@
 {
 	"pages": [
-		{
-			"path": "pages/cheaterAddProcess/cheaterAddProcess",
-			"style": {
-				"navigationBarTitleText": "添加行骗过程",
-				"navigationBarTextStyle": "white",
-				"navigationBarBackgroundColor":"#03198D"
-			}
-		},
 		
 		{
 			"path": "pages/scene/scene",
@@ -27,6 +19,14 @@
 			}
 		},
 		
+		{
+			"path": "pages/cheaterAddProcess/cheaterAddProcess",
+			"style": {
+				"navigationBarTitleText": "添加行骗过程",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor":"#03198D"
+			}
+		},
 		
 		{
 			"path": "pages/sceneDetail/sceneDetail",

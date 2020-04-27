@@ -374,22 +374,27 @@ $uni-color-error: #dd524d;
 					border-radius: 4px;
 					margin: 4px 10px 6px 0;
 					position: relative;
-					box-shadow: 0 0 0 0.5px #727272;
+					/* box-shadow: 0 0 0 0.5px #727272; */
+					
 					&.active{
-						box-shadow: 0 0 0 1px #03198D;
 						color: #03198D;
+						&:before{
+							border: 2px solid #03198D;
+						}
 					}
-					/* &:before{
-						content: "";
+						
+					&:before{
+						content: '';
+						position: absolute;
 						width: 200%;
 						height: 200%;
-						transform: scale(0.5);
-						position: absolute;
 						border: 1px solid #727272;
-						top: -50%;
-						left: -50%;
-						border-radius: 4px;
-					} */
+						transform-origin: 0 0;
+						transform: scale(0.5, 0.5);
+						box-sizing: border-box;
+						left: 0;
+						border-radius: 10px;
+					}
 				}
 			}
 		}

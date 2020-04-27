@@ -29,7 +29,7 @@
 					<text class="price">{{item.amount}}</text>
 				</view>
 				<view class="action-box b-t">
-					<button class="action-btn" @click="cancelOrder(item)">编辑往来</button>
+					<button class="action-btn" @click="editCheater(item)">编辑往来</button>
 					<!-- <button class="action-btn recom">立即支付</button> -->
 				</view>
 			</view>
@@ -122,6 +122,12 @@
 					}
 				}
 			},
+			
+			editCheater(){
+				uni.navigateTo({
+					url: '/pages/cheaterAddProcess/cheaterAddProcess'
+				})
+			}
 		}
 	}
 </script>

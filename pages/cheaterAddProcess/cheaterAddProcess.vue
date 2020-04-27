@@ -1,5 +1,7 @@
 <template>
 	<view class="content">
+		<mx-date-picker :color="'#03198D'" :showSeconds="false" :show="showPicker" :type="type" :value="dateValue" :show-tips="true" :begin-text="'开始时间'" :end-text="'结束时间'"
+			:show-seconds="true" @confirm="onSelected" @cancel="onSelected" />
 		<progress :percent="percent" stroke-width="1" />
 		<scroll-view scroll-y>
 			<view class="list-box">
@@ -19,26 +21,14 @@
 				</view>
 				<view class="detail b-b">
 					<text class="left">时间</text>
-					<view class="right">
-						<picker mode="date" :value="date" :start="startDate" :end="endDate" @change="dateChange">
-							<view>{{date}}</view>
-						</picker>
-					</view>
+					<text class="right" @click="onShowDatePicker('rangetime')" style="font-size: 12px;">
+						{{showDateValue}}
+					</text>
 				</view>
 				<view class="detail b-b">
-					<text class="left">口音或籍贯</text>
+					<text class="left">添加转账记录</text>
 					<input class="right"/>
 				</view>
-				<view class="detail b-b">
-					<text class="left">电话</text>
-					<input class="right"/>
-				</view>
-				<view class="detail b-b">
-					<text class="left">微信</text>
-					<input class="right"/>
-				</view>
-				
-				
 			</view>
 			
 			<button class="login-btn">保存</button>
@@ -48,9 +38,11 @@
 
 <script>
 	import avatar from "../../components/yq-avatar/yq-avatar.vue";
+	import MxDatePicker from "@/components/mx-datepicker/mx-datepicker.vue";
 	export default {
 		components:{
 			avatar,
+			MxDatePicker
 		},
 		data() {
 			// 设置日期
@@ -60,21 +52,23 @@
 				percent: 0,
 				url: "../../static/missing-face.png",
 				types: [],
-				date: this.getDate({
-					format: true
-				}), 
-                time: '12:01' // 时间初始的状态
+				showPicker: false,
+				rangetime: ['2019/01/08 14:00','2019/01/16 13:59'],
+				type: 'rangetime',
+				dateValue: ''
 				
 			}
 		},
-		computed: {
-            startDate() {
-                return this.getDate('start');
-            },
-            endDate() {
-                return this.getDate('end');
-            }
-        },
+		computed:{
+			showDateValue(){
+				if(this.dateValue != null && this.dateValue != '') {
+					return this.dateValue.join('—');
+				}else{
+					return '选择时间范围';
+				}
+			}
+		},
+		
 		methods: {
 			uploadIcon(){
 				//选择照片
@@ -130,31 +124,22 @@
 					this.types.push(item)
 				}
 			},
+			onShowDatePicker(type){//显示
+				this.type = type;
+				this.showPicker = true;
+				this.dateValue = this[type];
+			},
+			onSelected(e) {//选择
+				this.showPicker = false;
+				if(e) {
+					this[this.type] = e.value; 
+					//选择的值
+					console.log('value => '+ e.value);
+					//原始的Date对象
+					console.log('date => ' + e.date);
+				}
+			}
 			
-			// 选择时间 
-            timeChange(e) {
-                this.time = e.target.value
-            },
-            // 选择日期
-            dateChange(e) {
-                this.date = e.target.value
-            },
-            // 获取年月日信息
-            getDate(type) {
-                const date = new Date();
-                let year = date.getFullYear();
-                let month = date.getMonth() + 1;
-                let day = date.getDate();
-    
-                if (type === 'start') {
-                    year = year - 60;
-                } else if (type === 'end') {
-                    year = year + 2;
-                }
-                month = month > 9 ? month : '0' + month;;
-                day = day > 9 ? day : '0' + day;
-                return `${year}-${month}-${day}`;
-            }
 		}
 	}
 </script>
