@@ -54,16 +54,11 @@ export default {
 	data() {
 		return {
 			data: [],
+			total: 8,
 			loadingType: 'more' //加载更多状态
 		};
 	},
 	created() {
-		/* for(var i =0;i<20;i++){
-				this.data.push({
-					id: i,
-					name: 'Tony'+i
-				})
-			} */
 		this.loadData();
 	},
 	onPageScroll(e) {
@@ -86,7 +81,7 @@ export default {
 		//加载商品 ，带下拉刷新和上滑加载
 		async loadData(type = 'add', loading) {
 			//没有更多直接返回
-			if (type === 'add') {
+			if (type === 'add') { 
 				if (this.loadingType === 'nomore') {
 					return;
 				}
@@ -99,7 +94,7 @@ export default {
 			if (type === 'refresh') {
 				this.data = [];
 			}
-			//筛选，测试数据直接前端筛选了
+			/* //筛选，测试数据直接前端筛选了
 			if (this.filterIndex === 1) {
 				data.sort((a, b) => b.sales - a.sales);
 			}
@@ -110,12 +105,12 @@ export default {
 					}
 					return b.price - a.price;
 				});
-			}
+			} */
 
 			this.data = this.data.concat(data);
 
 			//判断是否还有下一页，有是more  没有是nomore(测试数据判断大于20就没有了)
-			this.loadingType = this.data.length > 20 ? 'nomore' : 'more';
+			this.loadingType = this.data.length >= this.total ? 'nomore' : 'more';
 			if (type === 'refresh') {
 				if (loading == 1) {
 					uni.hideLoading();

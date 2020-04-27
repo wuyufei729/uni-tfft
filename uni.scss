@@ -367,6 +367,45 @@ $uni-color-error: #dd524d;
 			.right{
 				line-height: 26px;
 				padding: 6px;
+				label{
+					padding: 0 12px;
+					display: inline-block;
+					font-size: 12px;
+					border-radius: 4px;
+					margin: 4px 10px 6px 0;
+					position: relative;
+					box-shadow: 0 0 0 0.5px #727272;
+					&.active{
+						box-shadow: 0 0 0 1px #03198D;
+						color: #03198D;
+					}
+					/* &:before{
+						content: "";
+						width: 200%;
+						height: 200%;
+						transform: scale(0.5);
+						position: absolute;
+						border: 1px solid #727272;
+						top: -50%;
+						left: -50%;
+						border-radius: 4px;
+					} */
+				}
+			}
+		}
+		&.avatar{
+			height: 220upx;
+			padding-top: 26upx;
+			display: block;
+			view{
+				text-align: center;
+			}
+			
+			.my-avatar{
+				//width: ;
+			}
+			.left{
+				margin-top: -36upx;
 			}
 		}
 	}
