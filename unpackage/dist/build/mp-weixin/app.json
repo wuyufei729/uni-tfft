@@ -1,5 +1,13 @@
 {
   "pages": [
+    "pages/scene/scene",
+    "pages/cheaterAdd/cheaterAdd",
+    "pages/cheaterAddProcess/cheaterAddProcess",
+    "pages/sceneDetail/sceneDetail",
+    "pages/userzoom/userzoom",
+    "pages/experience/experience",
+    "pages/cheater/cheater",
+    "pages/login/login",
     "pages/index/index",
     "pages/public/login",
     "pages/product/product",
@@ -27,36 +35,37 @@
     "backgroundColor": "#f8f8f8"
   },
   "tabBar": {
-    "color": "#C0C4CC",
-    "selectedColor": "#fa436a",
+    "color": "#aeb2ba",
+    "selectedColor": "#03198D",
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
     "list": [
       {
-        "pagePath": "pages/index/index",
-        "iconPath": "static/tab-home.png",
-        "selectedIconPath": "static/tab-home-current.png",
-        "text": "首页"
+        "pagePath": "pages/scene/scene",
+        "iconPath": "static/img/icon_scene.png",
+        "selectedIconPath": "static/img/icon_scene_active.png",
+        "text": "案件列表"
       },
       {
-        "pagePath": "pages/category/category",
-        "iconPath": "static/tab-cate.png",
-        "selectedIconPath": "static/tab-cate-current.png",
-        "text": "分类"
+        "pagePath": "pages/cheater/cheater",
+        "iconPath": "static/img/icon_cheater.png",
+        "selectedIconPath": "static/img/icon_cheater_active.png",
+        "text": "骗子们"
       },
       {
-        "pagePath": "pages/cart/cart",
-        "iconPath": "static/tab-cart.png",
-        "selectedIconPath": "static/tab-cart-current.png",
-        "text": "购物车"
+        "pagePath": "pages/experience/experience",
+        "iconPath": "static/img/icon_experience.png",
+        "selectedIconPath": "static/img/icon_experience_active.png",
+        "text": "经历"
       },
       {
-        "pagePath": "pages/user/user",
-        "iconPath": "static/tab-my.png",
-        "selectedIconPath": "static/tab-my-current.png",
+        "pagePath": "pages/userzoom/userzoom",
+        "iconPath": "static/img/icon_user.png",
+        "selectedIconPath": "static/img/icon_user_active.png",
         "text": "我的"
       }
     ]
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
 }
