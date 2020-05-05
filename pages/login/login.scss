@@ -9,7 +9,7 @@ page{
     background: #fff;
     box-sizing: border-box;
     .top {
-        height: 50%;
+        height: 55%;
         background: radial-gradient(ellipse,#0421bf,#052a6e);
         overflow: hidden;
         position: relative;
@@ -34,7 +34,7 @@ page{
 		}
     }
     .bottom{
-        height: 50%;
+        height: 45%;
         background-color: #FFFFFF;
         overflow: hidden;
         position: relative;
@@ -49,6 +49,7 @@ page{
                 height: 36px;
                 width: 60%;
                 display: inline-block;
+				border-radius: 4px;
                 input{
                     width: 80%;
                     border: none;
@@ -73,7 +74,7 @@ page{
             }
         }
         .input-code{
-            width: 80%;
+            width: 90%;
             margin: 20px auto;
             height: 80px;
             display: flex;
@@ -82,7 +83,7 @@ page{
             position: relative;
             .ele-span{
                 border: none;
-                width: 50px;
+                width: 38px;
                 border-bottom: 1px solid #00f0ff;
                 display: inline-block;
                 height: 70%;
@@ -115,4 +116,28 @@ page{
         }
     }
     
+}
+
+.scan-icon{
+	background: url(../../static/img/icon_scan.png) no-repeat center;
+	background-size: contain;
+	width: 80px;
+	height: 80px;
+	position: absolute;
+	top: 80px;
+	left: 50%;
+	margin-left: -40px;
+	overflow: hidden;
+}
+.scan-warn{
+	height: 40px;
+	line-height: 40px;
+	font-size: 16px;
+	text-align: center;
+	color: #909399;
+	margin-top: 180px;
+	text{
+		color: #0D48F2;
+		padding: 0 6px;
+	}
 }

@@ -7,8 +7,53 @@ const userInfo = {
 		nickname: 'Leo yo',
 		portrait: 'http://img.61ef.cn/news/201409/28/2014092805595807.jpg'
 	},
-	msg: '提示'
+	msg: '提示',
+	
+	userName: '刘能2',
+	mobile: '180 4545 5252',
+	openId: 'wx_dsfsdfsdf',
+	lastLoginTime: '2020-05-02 08:55:54',
+	bankCardList: ['6215 2255 3225 55656','6254 5555 5555 88789']
+	
 }
+
+const experienceList = [
+	{
+		inputTime: '2020-05-02 11:56:23',
+		icon: '../../static/missing-face.png',
+		cheaterName: '谢广坤',
+		amount: 5000,
+		caseTypeNameList: ['微信诈骗','电话诈骗'],
+		content: `内容：骗子：你家的需要保险吗，现在公司推出一款特别适合你们老年人的保险，属于意外险种类，只需要每年交一百块，最后儿女可以得到上百万的赔偿
+				 我：可以了解一下，是怎么个理赔，还有第一年交多少钱，有没有增项，，我得看看我的养老钱够不够，要是不够你借我点呗
+				 骗子：我也是给人家打工的，每个月就三千块钱，怎么可能有钱借给您呢，再说你可以跟你儿子借啊`
+	},
+	{
+		inputTime: '2020-05-02 11:56:23',
+		icon: '../../static/missing-face.png',
+		cheaterName: '谢广坤',
+		amount: 5000,
+		caseTypeNameList: ['微信诈骗','电话诈骗'],
+		content: `内容：骗子：你家的需要保险吗，现在公司推出一款特别适合你们老年人的保险，属于意外险种类，只需要每年交一百块，最后儿女可以得到上百万的赔偿
+				 我：可以了解一下，是怎么个理赔，还有第一年交多少钱，有没有增项，，我得看看我的养老钱够不够，要是不够你借我点呗
+				 骗子：我也是给人家打工的，每个月就三千块钱，怎么可能有钱借给您呢，再说你可以跟你儿子借啊`
+	},
+	{
+		inputTime: '2020-05-02 11:56:23',
+		icon: '../../static/missing-face.png',
+		cheaterName: '谢广坤',
+		amount: 5000,
+		caseTypeNameList: ['微信诈骗','电话诈骗'],
+		content: `内容：骗子：你家的需要保险吗，现在公司推出一款特别适合你们老年人的保险，属于意外险种类，只需要每年交一百块，最后儿女可以得到上百万的赔偿
+				 我：可以了解一下，是怎么个理赔，还有第一年交多少钱，有没有增项，，我得看看我的养老钱够不够，要是不够你借我点呗
+				 骗子：我也是给人家打工的，每个月就三千块钱，怎么可能有钱借给您呢，再说你可以跟你儿子借啊`
+	},
+	
+]
+	
+	
+
+
 /* 首页轮播图 */
 const carouselList = [{
 		src: "/static/temp/banner3.jpg",
@@ -85,6 +130,33 @@ const cheaterList = [
 		caseCount: 5,
 		amount: 7000
 	},
+]
+
+/**
+ * 行骗过程列表
+ */
+const cheaterProcess = [
+	{
+		typeName: '微信',
+		timeStart: '2020-05-01',
+		timeEnd: '2020-05-05',
+		content: "点上来福建省劳动法会计师代理费会计师的路口附近时考虑对方是老爹荆防颗粒时代峻峰",
+		transferRecords: ['http://img.61ef.cn/news/201903/20/2019032009251784.jpg']
+	},
+	{
+		typeName: '电话',
+		timeStart: '2020-05-01',
+		timeEnd: '2020-05-05',
+		content: "水电费地方点上来福建省劳动法会计师代理费会计师的路口附近时考虑对方是老爹荆防颗粒时代峻峰",
+		transferRecords: ['http://pic.rmb.bdstatic.com/819a044daa66718c2c40a48c1ba971e6.jpeg']
+	},
+	{
+		typeName: '微信',
+		timeStart: '2020-05-01',
+		timeEnd: '2020-05-05',
+		content: "点上来福建省劳动法会计师代理费会计师的路口附近时考虑对方是老爹荆防颗粒时代峻峰",
+		transferRecords: ['http://img.61ef.cn/news/201903/20/2019032009251784.jpg']
+	}
 ]
 
 /* 商品列表 */
@@ -722,5 +794,7 @@ export default {
 	orderList,
 	cateList,
 	sceneList,
-	cheaterList
+	cheaterList,
+	cheaterProcess,
+	experienceList
 }

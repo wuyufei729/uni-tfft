@@ -3,6 +3,10 @@ import store from './store'
 import App from './App'
 import request from './api/request.js'
 import Json from './Json' //测试用数据
+import validate from '@/js_sdk/fshjie-formvalidate/ys-validate.js'
+
+
+import Dictionary from '@/api/modules/dictionary.js'
 
 
 /**
@@ -48,6 +52,22 @@ Vue.prototype.$fire = new Vue();
 Vue.prototype.$store = store;
 Vue.prototype.$api = {msg, json, prePage};
 Vue.prototype.$request = request;
+Vue.prototype.$dic = Dictionary;
+Vue.prototype.$eventBus = new Vue();
+
+// 挂载到全局
+Vue.prototype.$validate = validate
+
+/**
+ * 图片查看大图-单图
+ */
+Vue.prototype.$viewImage = function(url){
+	uni.previewImage({
+		current: url,
+		urls: [url]
+	});
+}
+
 
 App.mpType = 'app'
 

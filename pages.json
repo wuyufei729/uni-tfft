@@ -1,5 +1,13 @@
 {
 	"pages": [
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor":"#03198D"
+			}
+		},
 		
 		{
 			"path": "pages/scene/scene",
@@ -10,19 +18,60 @@
 				"navigationBarBackgroundColor":"#03198D"
 			}
 		},
+		
 		{
-			"path": "pages/cheaterAdd/cheaterAdd",
+			"path":"pages/experience/experience",
 			"style": {
-				"navigationBarTitleText": "添加骗子",
+				"navigationBarTitleText": "经历",
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": true,
+				"navigationBarBackgroundColor":"#03198D"
+			}
+		},
+		
+		
+		
+		{
+			"path": "pages/cheaterProcess/cheaterProcess",
+			"style": {
+				"navigationBarTitleText": "行骗过程列表",
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": true,
+				"navigationBarBackgroundColor":"#03198D"
+			}
+		},
+		{
+			"path": "pages/cheaterProcessEdit/cheaterProcessEdit",
+			"style": {
+				"navigationBarTitleText": "编辑行骗过程",
 				"navigationBarTextStyle": "white",
 				"navigationBarBackgroundColor":"#03198D"
 			}
 		},
 		
 		{
-			"path": "pages/cheaterAddProcess/cheaterAddProcess",
+			"path": "pages/cheaterProcessAdd/cheaterProcessAdd",
 			"style": {
 				"navigationBarTitleText": "添加行骗过程",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor":"#03198D"
+			}
+		},
+		
+		
+		{
+			"path": "pages/scanqr/scanqr",
+			"style": {
+				"navigationBarTitleText": "扫码添加案件",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor":"#03198D"
+			}
+		},
+		
+		{
+			"path": "pages/cheaterAdd/cheaterAdd",
+			"style": {
+				"navigationBarTitleText": "添加骗子",
 				"navigationBarTextStyle": "white",
 				"navigationBarBackgroundColor":"#03198D"
 			}
@@ -44,32 +93,16 @@
 				"navigationBarBackgroundColor":"#03198D"
 			}
 		},
-		{
-			"path":"pages/experience/experience",
-			"style": {
-				"navigationBarTitleText": "经历",
-				"navigationBarTextStyle": "white",
-				"navigationBarBackgroundColor":"#03198D"
-			}
-		},
+		
 		{
 			"path": "pages/cheater/cheater",
 			"style": {
 				"navigationBarTitleText": "骗子列表",
 				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": true,
 				"navigationBarBackgroundColor":"#03198D"
 			}
 		},
-		
-		{
-			"path": "pages/login/login",
-			"style": {
-				"navigationBarTitleText": "登录",
-				"navigationBarTextStyle": "white",
-				"navigationBarBackgroundColor":"#03198D"
-			}
-		},
-		
 		
 		{
 			"path": "pages/index/index",
@@ -109,7 +142,7 @@
 				}
 			}
 		},
-		{
+		/* {
 			"path": "pages/public/login",
 			"style": {
 				"navigationBarTitleText": "",
@@ -119,7 +152,7 @@
 					"animationType": "slide-in-bottom"
 				}
 			}
-		},
+		}, */
 		{
 			"path": "pages/product/product",
 			"style": {

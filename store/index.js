@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import cheaterProcess from './cheaterProcess.js'
+import scene from './scene.js'
 
 Vue.use(Vuex)
 
@@ -29,6 +31,10 @@ const store = new Vuex.Store({
 	},
 	actions: {
 	
+	},
+	modules:{
+		cheaterProcess,
+		scene
 	}
 })
 

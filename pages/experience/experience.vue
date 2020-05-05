@@ -1,78 +1,35 @@
 <template>
 	<view class="content">
 		<timeline>
-			<timelineItem>
+			<timelineItem v-for="(item,i) in data" :key="i">
 				<view class="tripItem">
-					<view class="time">2020-08-05 11:56:54</view>
+					<view class="time">{{item.startDateTime}}</view>
 					<view class="title">
+						<!-- <image :src="item.imageUrl.thumbUrl"></image> -->
 						<image src="../../static/missing-face.png"></image>
-						<text>谢广坤</text>
+						<text>{{item.name}}</text>
+						<text class="money">受骗金额<text>￥{{item.amount}}</text></text>
 					</view>
-					<view class="tips">内容：代理商的减肥了快速的减肥是多了几分水电费老师就打开了福建省水电费了深刻的减肥了圣诞节开发水电费了几十块的反馈了</view>
-				</view>
-			</timelineItem>
-			<timelineItem>
-				<view class="tripItem">
-					<view class="time">2020-08-05 11:56:54</view>
-					<view class="title">
-						<image src="../../static/missing-face.png"></image>
-						<text>谢广坤</text>
+					<view class="tips">
+						<view class="means">
+							<text>{{item.criminalToolTypeName}}</text>
+						</view>
+						<view class="">
+							{{item.process}}
+						</view>
 					</view>
-					<view class="tips">内容：代理商的减肥了快速的减肥是多了几分水电费老师就打开了福建省水电费了深刻的减肥了圣诞节开发水电费了几十块的反馈了</view>
-				</view>
-				<view class="tripItem my">
-					<view class="time">2020-08-05 11:56:54</view>
-					<view class="title">
-						<image src="../../static/tab-my-current.png"></image>
-						<text>我</text>
-					</view>
-					<view class="tips">内容：代理商的减肥了快的减肥是多了几分水电费老师就打开了福建省水电费了深刻的减肥了圣诞节开发水电费了几十块的反馈了</view>
-				</view>
-			</timelineItem>
-			<timelineItem>
-				<view class="tripItem">
-					<view class="time">2020-08-05 11:56:54</view>
-					<view class="title">
-						<image src="../../static/missing-face.png"></image>
-						<text>谢广坤</text>
-					</view>
-					<view class="tips">内容：代理商的减肥了快速的减肥是多了几分水电费老师就打开了福建省水电费了深刻的减肥了圣诞节开发水电费了几十块的反馈了</view>
-				</view>
-				<view class="tripItem my">
-					<view class="time">2020-08-05 11:56:54</view>
-					<view class="title">
-						<image src="../../static/tab-my-current.png"></image>
-						<text>我</text>
-					</view>
-					<view class="tips">内容：代理商的减肥了快的减肥是多了几分水电费老师就打开了福建省水电费了深刻的减肥了圣诞节开发水电费了几十块的反馈了</view>
-				</view>
-			</timelineItem>
-			<timelineItem>
-				<view class="tripItem">
-					<view class="time">2020-08-05 11:56:54</view>
-					<view class="title">
-						<image src="../../static/missing-face.png"></image>
-						<text>谢广坤</text>
-					</view>
-					<view class="tips">内容：代理商的减肥了快速的减肥是多了几分水电费老师就打开了福建省水电费了深刻的减肥了圣诞节开发水电费了几十块的反馈了</view>
-				</view>
-				<view class="tripItem my">
-					<view class="time">2020-08-05 11:56:54</view>
-					<view class="title">
-						<image src="../../static/tab-my-current.png"></image>
-						<text>我</text>
-					</view>
-					<view class="tips">内容：代理商的减肥了快的减肥是多了几分水电费老师就打开了福建省水电费了深刻的减肥了圣诞节开发水电费了几十块的反馈了</view>
 				</view>
 			</timelineItem>
 		</timeline>
+		<uni-load-more :status="loadingType"></uni-load-more>
 	</view>
 </template>
 
 <script>
-import uniLoadMore from '@/components/uni-load-more/uni-load-more.vue';
-import timeline from '../../components/chenbin-timeline/timeLine.vue';
-import timelineItem from '../../components/chenbin-timeline/timelineItem.vue';
+import uniLoadMore from '@/components/uni-load-more/uni-load-more.vue'
+import timeline from '../../components/chenbin-timeline/timeLine.vue'
+import timelineItem from '../../components/chenbin-timeline/timelineItem.vue'
+import {GetUserExperienceListByPage} from '@/api/modules/user.js'
 export default {
 	components: {
 		uniLoadMore,
@@ -82,6 +39,9 @@ export default {
 	data() {
 		return {
 			data: [],
+			total: 0,
+			currentPage: 1,
+			pageSize: 3,
 			loadingType: 'more' //加载更多状态
 		};
 	},
@@ -102,11 +62,57 @@ export default {
 	},
 	//加载更多
 	onReachBottom() {
-		this.loadData();
+		if(this.total != 0 && this.total === this.data.length){
+			this.loadingType = "nomore";
+		}else{
+			this.currentPage += 1;
+			this.loadData();
+		}
 	},
 	methods: {
+		
+		/**
+		 * todo 获取被骗经历
+		 */
+		loadData(type ='add', loading){
+			const _this = this;
+			//没有更多直接返回
+			if (type === 'add') {
+				if (this.loadingType === 'nomore') {
+					return;
+				}
+				this.loadingType = 'loading';
+			} else {
+				this.loadingType = 'more';
+			}
+			let filter = {
+				pageSize: _this.pageSize,
+				currentPage: _this.currentPage
+			}
+			GetUserExperienceListByPage(filter).then(res=>{
+				let data = res.data;
+				if (type === 'refresh') {
+					_this.data = [];
+				}
+				_this.data = _this.data.concat(data.result);
+				_this.total = data.total;
+				
+				//判断是否还有下一页，有是more  没有是nomore(测试数据判断大于20就没有了)
+				_this.loadingType = _this.data.length >= _this.total ? 'nomore' : 'more';
+				if (type === 'refresh') {
+					if (loading == 1) {
+						uni.hideLoading();
+					} else {
+						uni.stopPullDownRefresh();
+					}
+				}
+			}).catch(err=>{
+				console.log('获取被骗经历失败！')
+			})
+		},
+		
 		//加载商品 ，带下拉刷新和上滑加载
-		async loadData(type = 'add', loading) {
+		async loadData2(type ='add', loading) {
 			//没有更多直接返回
 			if (type === 'add') {
 				if (this.loadingType === 'nomore') {
@@ -117,27 +123,16 @@ export default {
 				this.loadingType = 'more';
 			}
 
-			let data = await this.$api.json('cheaterList');
+			let data = await this.$api.json('experienceList');
 
 			if (type === 'refresh') {
 				this.data = [];
 			}
-			//筛选，测试数据直接前端筛选了
-			if (this.filterIndex === 1) {
-				data.sort((a, b) => b.sales - a.sales);
-			}
-			if (this.filterIndex === 2) {
-				data.sort((a, b) => {
-					if (this.priceOrder == 1) {
-						return a.price - b.price;
-					}
-					return b.price - a.price;
-				});
-			}
+			
 			this.data = this.data.concat(data);
 
 			//判断是否还有下一页，有是more  没有是nomore(测试数据判断大于20就没有了)
-			this.loadingType = this.data.length > 20 ? 'nomore' : 'more';
+			this.loadingType = this.data.length >= this.total ? 'nomore' : 'more';
 			if (type === 'refresh') {
 				if (loading == 1) {
 					uni.hideLoading();

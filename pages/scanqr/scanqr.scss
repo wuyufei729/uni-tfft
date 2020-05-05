@@ -1,0 +1,118 @@
+page{
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+.login {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    box-sizing: border-box;
+    .top {
+        height: 50%;
+        background: radial-gradient(ellipse,#0421bf,#052a6e);
+        overflow: hidden;
+        position: relative;
+        .logoBox{
+            width: 80px;
+            height: 80px;
+            margin: 40px auto 25px auto;
+            display: block;
+        }
+        .logo {
+			width: 70px;
+			height: 70px;
+			background: url(../../static/img/logo.png) no-repeat center;
+			background-size: contain;
+			margin: 120rpx auto 56rpx auto;
+		}
+		.title {
+			color: #ffffff;
+			text-align: center;
+			font-weight: bold;
+			font-size: 40rpx;
+		}
+    }
+    .bottom{
+        height: 50%;
+        background-color: #FFFFFF;
+        overflow: hidden;
+        position: relative;
+        top: -18px;
+        border-radius: 15px 15px 0 0;
+        .input-phone{
+            height: 40px;
+            width: 100%;
+            margin: 40px auto 20px 20px;
+            .ele-p{
+                border: 1px solid #ddd;
+                height: 36px;
+                width: 60%;
+                display: inline-block;
+                input{
+                    width: 80%;
+                    border: none;
+                    height: 100%;
+                    margin-left: 20px;
+                    font-size: 16px;
+                    display: inline-block;
+                    margin-left: 10%;
+                }
+            }
+            .get-code{
+                display: inline-block;
+                width: 25%;
+                margin-left: 5%;
+                height: 36px;
+                line-height: 36px;
+                vertical-align: top;
+                text-align: center;
+                label{
+                    color: #00f0ff;
+                }
+            }
+        }
+        .input-code{
+            width: 80%;
+            margin: 20px auto;
+            height: 80px;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            position: relative;
+            .ele-span{
+                border: none;
+                width: 50px;
+                border-bottom: 1px solid #00f0ff;
+                display: inline-block;
+                height: 70%;
+                text-align: center;
+                font-size: 36px;
+                text-align: center;
+            }
+            .plateInput{
+                width: 200%;
+                height: 80%;
+                border: 1px solid black;
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                //color:red;
+                opacity: 0;
+                color: transparent;
+                outline: none;
+                caret-color: transparent;
+                -webkit-text-fill-color: transparent;
+                &:focus{
+                    opacity: 0;
+                    color: transparent;
+                    outline: none;
+                    caret-color: transparent;
+                    -webkit-text-fill-color: transparent;
+                }
+            }
+              
+        }
+    }
+    
+}
