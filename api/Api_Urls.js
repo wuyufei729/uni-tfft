@@ -26,12 +26,12 @@ let Api_Urls = {
 	Cheater_addCheaterURL: `${baseURL}/Cheater`,//添加骗子
 	
 	/* 行骗过程 */
-	Process_getCheaterProcessListURL: `${baseURL}/TradingRecord?currentPage=#currentPage#&pageSize=#pageSize#&cheaterId=#cheaterId#`, //获取行骗过程列表
-	Porcess_getCheaterProcessURL: `${baseURL}/TradingRecord/#id#`,//获取某条行骗过程
-	Porcess_deleteCheaterProcessURL: `${baseURL}/TradingRecord/#id#`,//删除某条行骗过程
-	Porcess_putUpdateCheaterProcessURL: `${baseURL}/TradingRecord/#id#`,//修改某条行骗过程
-	Porcess_postAddCheaterProcessURL: `${baseURL}/TradingRecord`,//新增某条行骗过程
-	Porcess_getCheaterProcessTypesURL: `${baseURL}/TradingRecord/TradingRecordTpye`,//获取行骗类型
+	Process_getCheaterProcessListURL: `${baseURL}/CriminalToolProcess?currentPage=#currentPage#&pageSize=#pageSize#&cheaterId=#cheaterId#`, //获取行骗过程列表
+	Porcess_getCheaterProcessURL: `${baseURL}/CriminalToolProcess/#id#`,//获取某条行骗过程
+	Porcess_deleteCheaterProcessURL: `${baseURL}/CriminalToolProcess/#id#`,//删除某条行骗过程
+	Porcess_putUpdateCheaterProcessURL: `${baseURL}/CriminalToolProcess/#id#`,//修改某条行骗过程
+	Porcess_postAddCheaterProcessURL: `${baseURL}/CriminalToolProcess`,//新增某条行骗过程
+	Porcess_getCheaterProcessTypesURL: `${baseURL}/CriminalToolProcess/CriminalToolType`,//获取行骗类型
 	
 	
 	

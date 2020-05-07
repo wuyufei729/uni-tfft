@@ -77,7 +77,7 @@ export default {
 			this.initData()
 		}
 		this.$eventBus.$on('addCheaterSuccess', function (data) {
-		 	_this.initData();
+		 	_this.initData('refresh');
 		});
 	},
 	

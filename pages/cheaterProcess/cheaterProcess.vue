@@ -8,7 +8,7 @@
 			<!-- 行骗记录列表 -->
 			<view v-for="(item,index) in v_data" :key="index" class="order-item process-list">
 				<view class="i-top b-b">
-					<text class="time">{{item.startDateTime+" - "+item.endDateTime}}</text>
+					<text class="time">{{showDateTime(item)}}</text>
 					<text class="del-btn yticon icon-iconfontshanchu1" @click="deleteCheaterProcess(item)"></text>
 				</view>
 				<view class="goods-box-single">
@@ -62,7 +62,7 @@
 			}
 			
 			this.$eventBus.$on('refreshCheaterProcessList', function (data) {
-			 	_this.loadData();
+				_this.loadData('refresh');
 			});
 		},
 		onPageScroll(e){
@@ -165,8 +165,26 @@
 				        }
 				    }
 				});
-			}
+			},
+			/**
+			 * 显示时间
+			 */
+			showDateTime(item){
+				if(item.startDateTime != null && item.endDateTime != null){
+					return item.startDateTime + ' - '+item.endDateTime
+				}else if(item.startDateTime != null ){
+					return item.startDateTime
+				}else if(item.endDateTime != null){
+					return item.endDateTime
+				}else{
+					return '';
+				}
+			},
 		},
+		
+		
+		
+		
 		beforeDestroy() {
 			this.$eventBus.$off('refreshCheaterProcessList');
 		}

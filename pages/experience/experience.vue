@@ -15,7 +15,7 @@
 							<text>{{item.criminalToolTypeName}}</text>
 						</view>
 						<view class="">
-							{{item.process}}
+							{{item.process == null? '':item.process}}
 						</view>
 					</view>
 				</view>

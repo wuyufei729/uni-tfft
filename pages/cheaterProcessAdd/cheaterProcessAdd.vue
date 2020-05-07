@@ -9,6 +9,10 @@
 					<text class="title-icon"></text>
 					<text class="title-text">添加行骗过程</text>
 				</view>
+				<view class="detail details b-b">
+					<text class="left">涉案金额</text>
+					<input type="number" class="right" style="flex: 4;" v-model="amounts" />
+				</view>
 				<view class="detail details b-b"> 
 					<text class="left">行骗方式</text>
 					<view class="right" style="flex: 4;">
@@ -65,6 +69,7 @@
 				url: "../../static/missing-face.png",
 				types: [],
 				content: '',
+				amounts: 0,
 				
 				showPicker: false,
 				//rangetime: [],//['2019/01/08 14:00','2019/01/16 13:59'],
@@ -129,7 +134,8 @@
 					startDateTime: _this.dateValue[0],
 					endDateTime: _this.dateValue[1],
 					criminalToolType: checkedType,
-					process: _this.content
+					process: _this.content,
+					amounts: _this.amounts
 				}
 				AddCheaterProcess(postData).then(res=>{
 					if(res){

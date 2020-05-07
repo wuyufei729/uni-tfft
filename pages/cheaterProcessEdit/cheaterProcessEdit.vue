@@ -9,6 +9,10 @@
 					<text class="title-icon"></text>
 					<text class="title-text">编辑行骗过程</text>
 				</view>
+				<view class="detail details b-b">
+					<text class="left">涉案金额</text>
+					<input type="number" class="right" style="flex: 4;" v-model="data.amounts" />
+				</view>
 				<view class="detail details b-b"> 
 					<text class="left">行骗方式</text>
 					<view class="right" style="flex: 4;">
@@ -23,7 +27,7 @@
 				</view>
 				<view class="detail b-b" style="height: 120px;">
 					<text class="left">内容</text>
-					<textarea class="input-text right" v-model="data.content" style="flex: 4;height: 110px" placeholder="拷贝粘贴微信/QQ/邮件/短信等内容">
+					<textarea class="input-text right" v-model="data.process" style="flex: 4;height: 110px" placeholder="拷贝粘贴微信/QQ/邮件/短信等内容">
 					</textarea>
 				</view>
 				<view class="detail b-b">
@@ -89,7 +93,17 @@
 			this.getData(); */
 			this.data = uni.getStorageSync('cheaterPorcessEditData');
 			this.initProcessTypes();
-			this.dateValue = [this.data.startDateTime,this.data.endDateTime];
+			
+			if(this.data.startDateTime != null && this.data.endDateTime != null){
+				this.dateValue = [this.data.startDateTime,this.data.endDateTime];
+			}else if(this.data.startDateTime != null){
+				this.dateValue = [this.data.startDateTime];
+			}else if(this.data.endDateTime != null){
+				this.dateValue = [this.data.endDateTime];
+			}else{
+				this.dateValue = null;
+			}
+			
 			
 		},
 		
@@ -144,8 +158,8 @@
 					checkedType = _this.types.find(p=>p.checked).id
 				}
 				
-				_this.data.timeStart = _this.dateValue.length>0? _this.dateValue[0]: null;
-				_this.data.timeEnd = _this.dateValue.length>2? _this.dateValue[1]: null;
+				_this.data.startDateTime = _this.dateValue != null && _this.dateValue.length>0? _this.dateValue[0]: null;
+				_this.data.endDateTime = _this.dateValue != null&& _this.dateValue.length>2? _this.dateValue[1]: null;
 				_this.data.criminalToolType = checkedType;
 				
 				UpdateCheaterProcess(_this.data).then(res=>{
