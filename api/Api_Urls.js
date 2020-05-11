@@ -22,8 +22,10 @@ let Api_Urls = {
 	
 	/* 骗子 */
 	Cheater_getCheaterListURL: `${baseURL}/Cheater?currentPage=#currentPage#&pageSize=#pageSize#`,//获取骗子列表
-	Cheater_deleteCheaterURL: `${baseURL}/Cheater`,//删除骗子
+	Cheater_deleteCheaterURL: `${baseURL}/Cheater/#id#`,//删除骗子
 	Cheater_addCheaterURL: `${baseURL}/Cheater`,//添加骗子
+	
+	Cheater_uploadIconURL: `${baseURL}/Attachments/CheaterPhoto`,//上传骗子头像
 	
 	/* 行骗过程 */
 	Process_getCheaterProcessListURL: `${baseURL}/CriminalToolProcess?currentPage=#currentPage#&pageSize=#pageSize#&cheaterId=#cheaterId#`, //获取行骗过程列表
@@ -32,6 +34,11 @@ let Api_Urls = {
 	Porcess_putUpdateCheaterProcessURL: `${baseURL}/CriminalToolProcess/#id#`,//修改某条行骗过程
 	Porcess_postAddCheaterProcessURL: `${baseURL}/CriminalToolProcess`,//新增某条行骗过程
 	Porcess_getCheaterProcessTypesURL: `${baseURL}/CriminalToolProcess/CriminalToolType`,//获取行骗类型
+	/**
+	 * 证据
+	 */
+	Porcess_uploadCheaterProcessFileURL: `${baseURL}/Attachments/Evidence`,//上传行骗证据
+	Porcess_deleteCheaterProcessFileURL:`${baseURL}/Attachments/Evidence`,//删除行骗证据
 	
 	
 	

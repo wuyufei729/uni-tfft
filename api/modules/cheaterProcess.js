@@ -64,3 +64,26 @@ export function GetCheaterProcessTypes(){
 	    method: 'GET'
 	})
 }
+
+/**
+ * 上传行骗证据
+ */
+export function UploadCheaterProcessFile(data){
+	return request({
+	    url: ApiUrls.Porcess_uploadCheaterProcessFileURL,
+	    method: 'POST',
+	    data: data,
+		isUpload: true,
+	})
+}
+
+/**
+ * 删除行骗证据
+ */
+export function DeleteCheaterProcessFile(data){
+	return request({
+	    url: ApiUrls.Porcess_deleteCheaterProcessFileURL,
+	    method: 'DELETE',
+	    data: data,
+	})
+}

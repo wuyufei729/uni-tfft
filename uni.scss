@@ -379,6 +379,11 @@ $uni-color-error: #dd524d;
 }
 
 .list-box{
+	&.edit{
+		.right{
+			color: #000000;
+		}
+	}
 	.title{
 		position: relative;
 		height: 40px;

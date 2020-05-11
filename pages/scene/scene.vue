@@ -57,6 +57,7 @@ export default {
 	},
 	//下拉刷新
 	onPullDownRefresh() {
+		this.v_SetCurrent(1)
 		this.loadData('refresh');
 	},
 	//加载更多

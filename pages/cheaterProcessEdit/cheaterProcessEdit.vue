@@ -4,7 +4,7 @@
 			:show-seconds="true" @confirm="onSelected" @cancel="onSelected" />
 		<progress :percent="percent" stroke-width="1" />
 		<scroll-view scroll-y>
-			<view class="list-box">
+			<view class="list-box edit">
 				<view class="title b-b">
 					<text class="title-icon"></text>
 					<text class="title-text">编辑行骗过程</text>
@@ -36,8 +36,8 @@
 				</view>
 				
 				<scroll-view scroll-x class="image-list inner">
-					<view class="item" v-for="(item,i) in uploadFiles" :key="i">
-						<image :src="item" mode="aspectFill" @click="$viewImage(item)"></image>
+					<view class="item" v-for="(item,i) in data.evidenceImageUrls" :key="i">
+						<image :src="item.thumbUrl" mode="aspectFill" @click="$viewImage(item.thumbUrl)"></image>
 						<text class="remove" @click="removeFile(item)">×</text>
 					</view>
 				</scroll-view>
@@ -52,7 +52,8 @@
 	import avatar from "../../components/yq-avatar/yq-avatar.vue"
 	import MxDatePicker from "@/components/mx-datepicker/mx-datepicker.vue"
 	import {mapState} from 'vuex'
-	import {GetCheaterProcessTypes,GetCheaterProcess,UpdateCheaterProcess} from '@/api/modules/cheaterProcess.js'
+	import {GetCheaterProcessTypes,GetCheaterProcess,UpdateCheaterProcess, 
+		UploadCheaterProcessFile,DeleteCheaterProcessFile} from '@/api/modules/cheaterProcess.js'
 	export default {
 		components:{
 			avatar,
@@ -69,10 +70,6 @@
 				//rangetime: [],//['2019/01/08 14:00','2019/01/16 13:59'],
 				type: 'rangetime',
 				dateValue: [],
-				
-				uploadFiles: [],
-				
-				progressId: null,
 			}
 		},
 		computed:{
@@ -103,8 +100,6 @@
 			}else{
 				this.dateValue = null;
 			}
-			
-			
 		},
 		
 		methods: {
@@ -161,6 +156,7 @@
 				_this.data.startDateTime = _this.dateValue != null && _this.dateValue.length>0? _this.dateValue[0]: null;
 				_this.data.endDateTime = _this.dateValue != null&& _this.dateValue.length>2? _this.dateValue[1]: null;
 				_this.data.criminalToolType = checkedType;
+				_this.data.experienceIds = _this.experienceIds;
 				
 				UpdateCheaterProcess(_this.data).then(res=>{
 					if(res){
@@ -181,28 +177,36 @@
 				
 			},
 			uploadIcon(){
+				const _this = this;
 				//选择照片
                 uni.chooseImage({
                     count:1,
                     sizeType:'compressed',
                     success: (res) => {
                         const imgsFile = res.tempFilePaths;
-						this.uploadFiles.push(imgsFile[0]);
-                        //上传
-                        /* const uper=uni.uploadFile({
-                            url: 'https://demo.hcoder.net/index.php?c=uperTest',
-                            filePath: imgsFile[0],
-                            name: 'file',
-                            // formData:{    },用于做令牌认证
-                            success: function(res1){
-                                console.log(res1.data)
-                            }
-                        })
-                        //上传进度更新的方法
-                        uper.onProgressUpdate((e)=>{
-                            console.log(e)
-                            _self.percent=e.progress
-                        }) */
+						_this.data.evidenceImageUrls.push({
+							thumbUrl: imgsFile[0],
+							id: null
+						});
+						let uploadData = {
+							filePath: imgsFile[0],
+							formData:{
+								criminalToolProcessId: _this.data.id
+							}
+						}
+						//上传图片
+						UploadCheaterProcessFile(uploadData).then(res=>{
+							if(res && res.data){
+								var evidence = JSON.parse(res.data);
+								if(evidence != null){
+									_this.data.evidenceImageUrls.find(p=>p.thumbUrl == uploadData.filePath).id = evidence.evidenceId
+								}else{
+									console.log('上传行骗证据返回为空！');
+								}
+							}
+						   }).catch(err=>{
+							console.log('上传行骗证据失败！')
+						})
                     }
                 })
 			},
@@ -213,7 +217,19 @@
 			 * 删除某个图片
 			 */
 			removeFile(item){
-				this.uploadFiles = this.uploadFiles.filter(p=>p != item);
+				const _this = this;
+				this.data.evidenceImageUrls = this.data.evidenceImageUrls.filter(p=>p != item)
+				
+				var postData = {
+					evidenceId: item.id,
+					criminalToolProcessId: _this.data.id
+				}
+				DeleteCheaterProcessFile(postData).then(res=>{
+					
+				}).catch(err=>{
+					console.log('删除证据失败！')
+				})
+				
 			},
 			
 			slideType(item){

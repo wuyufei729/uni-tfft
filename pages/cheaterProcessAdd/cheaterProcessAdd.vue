@@ -4,7 +4,7 @@
 			:show-seconds="true" @confirm="onSelected" @cancel="onSelected" />
 		<progress :percent="percent" stroke-width="1" />
 		<scroll-view scroll-y>
-			<view class="list-box">
+			<view class="list-box edit">
 				<view class="title b-b">
 					<text class="title-icon"></text>
 					<text class="title-text">添加行骗过程</text>
@@ -37,8 +37,8 @@
 				</view>
 				
 				<scroll-view scroll-x class="image-list inner">
-					<view class="item" v-for="(item,i) in uploadFiles" :key="i">
-						<image :src="item" mode="aspectFill"></image>
+					<view class="item" v-for="(item,i) in evidenceImageUrls" :key="i">
+						<image :src="item.thumbUrl" mode="aspectFill"></image>
 						<text class="remove" @click="removeFile(item)">×</text>
 					</view>
 				</scroll-view>
@@ -53,7 +53,7 @@
 	import avatar from "../../components/yq-avatar/yq-avatar.vue"
 	import MxDatePicker from "@/components/mx-datepicker/mx-datepicker.vue"
 	import {mapState, mapActions} from 'vuex'
-	import {GetCheaterProcessTypes, AddCheaterProcess} from '@/api/modules/cheaterProcess.js'
+	import {GetCheaterProcessTypes, AddCheaterProcess, UploadCheaterProcessFile} from '@/api/modules/cheaterProcess.js'
 	export default {
 		components:{
 			avatar,
@@ -76,7 +76,8 @@
 				type: 'rangetime',
 				dateValue: '',
 				
-				uploadFiles: [],
+				evidenceImageUrls: [],
+				
 			}
 		},
 		computed:{
@@ -135,7 +136,8 @@
 					endDateTime: _this.dateValue[1],
 					criminalToolType: checkedType,
 					process: _this.content,
-					amounts: _this.amounts
+					amounts: _this.amounts,
+					experienceIds: _this.evidenceImageUrls.map(p=>p.id)
 				}
 				AddCheaterProcess(postData).then(res=>{
 					if(res){
@@ -157,29 +159,42 @@
 				
 				
 			},
+			
+			/**
+			 * 上传证据
+			 */
 			uploadIcon(){
+				const _this = this;
 				//选择照片
                 uni.chooseImage({
                     count:1,
                     sizeType:'compressed',
                     success: (res) => {
                         const imgsFile = res.tempFilePaths;
-						this.uploadFiles.push(imgsFile[0]);
-                        //上传
-                        /* const uper=uni.uploadFile({
-                            url: 'https://demo.hcoder.net/index.php?c=uperTest',
-                            filePath: imgsFile[0],
-                            name: 'file',
-                            // formData:{    },用于做令牌认证
-                            success: function(res1){
-                                console.log(res1.data)
-                            }
-                        })
-                        //上传进度更新的方法
-                        uper.onProgressUpdate((e)=>{
-                            console.log(e)
-                            _self.percent=e.progress
-                        }) */
+						_this.evidenceImageUrls.push({
+							thumbUrl: imgsFile[0],
+							id: null
+						})
+						
+						let uploadData = {
+							filePath: imgsFile[0],
+							formData:{
+								criminalToolProcessId: null
+							}
+						}
+						//上传图片
+						UploadCheaterProcessFile(uploadData).then(res=>{
+							if(res && res.data){
+								var evidence = JSON.parse(res.data);
+								if(evidence != null){
+									_this.evidenceImageUrls.find(p=>p.thumbUrl == uploadData.filePath).id = evidence.evidenceId
+								}else{
+									console.log('上传行骗证据返回为空！');
+								}
+							}
+						   }).catch(err=>{
+							console.log('上传行骗证据失败！')
+						})
                     }
                 })
 			},
@@ -188,7 +203,15 @@
 			 * 删除某个图片
 			 */
 			removeFile(item){
-				this.uploadFiles = this.uploadFiles.filter(p=>p != item);
+				var postData = {
+					evidenceId: item.id,
+					criminalToolProcessId: null
+				}
+				DeleteCheaterProcessFile(postData).then(res=>{
+					
+				}).catch(err=>{
+					console.log('删除证据失败！')
+				})
 			},
 			
 			slideType(item){

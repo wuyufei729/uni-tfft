@@ -16,11 +16,10 @@ export function GetCheaterListByPage(data){
 /**
  * 删除骗子
  */
-export function DeleteCheater(data){
+export function DeleteCheater(id){
 	return request({
-	    url: ApiUrls.Cheater_deleteCheaterURL,
-	    method: 'POST',
-	    data: data
+	    url: ApiUrls.Cheater_deleteCheaterURL.replace('#id#',id),
+	    method: 'DELETE',
 	})
 }
 
@@ -32,5 +31,17 @@ export function AddCheater(data){
 	    url: ApiUrls.Cheater_addCheaterURL,
 	    method: 'POST',
 	    data: data
+	})
+}
+
+/**
+ * 上传骗子头像
+ */
+export function UploadCheaterIcon(data){
+	return request({
+	    url: ApiUrls.Cheater_uploadIconURL,
+	    method: 'POST',
+	    data: data,
+		isUpload: true,
 	})
 }

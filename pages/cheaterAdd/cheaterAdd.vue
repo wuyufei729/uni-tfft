@@ -2,7 +2,7 @@
 	<view class="content">
 		<progress :percent="percent" stroke-width="1" />
 		<scroll-view scroll-y>
-			<view class="list-box">
+			<view class="list-box edit">
 				<view class="title b-b">
 					<text class="title-icon"></text>
 					<text class="title-text">骗子信息录入</text>
@@ -13,6 +13,7 @@
 							selWidth="200px" selHeight="400upx" @upload="uploadIcon" :avatarSrc="url"
 							avatarStyle="width: 120upx; height: 120upx; border-radius: 100%;">
 						</avatar>
+						<!-- <button type="default" @click="test">上传</button> -->
 					</view>
 					<view class="left">头像</view>
 				</view>
@@ -58,7 +59,7 @@
 
 <script>
 	import avatar from "../../components/yq-avatar/yq-avatar.vue"
-	import {AddCheater} from '@/api/modules/cheater.js'
+	import {AddCheater,UploadCheaterIcon} from '@/api/modules/cheater.js'
 	
 	export default {
 		components:{
@@ -67,6 +68,7 @@
 		data() {
 			return {
 				data: {
+					caseId: "",
 					name: "",
 				    approximateAge: 0,
 					accentOrBirthplace: "",
@@ -76,7 +78,8 @@
 					otherAppId: "",
 					otherAppName: "",
 					bankCard: "",
-					caseId: "",
+					photoUrl: "",
+					photoThumbUrl: "",
 				},
 				percent: 0,
 				url: "../../static/missing-face.png",
@@ -95,44 +98,51 @@
 			 * 添加骗子
 			 */
 			addCheater(){
-				
+				uni.showLoading({
+				    title: '提交中...',
+				    mask: true // 默认遮罩出现可以继续操作
+				});
 				const _this = this;
 				AddCheater(this.data).then(res=>{
+					uni.hideLoading()
 					if(res){
 						_this.$eventBus.$emit('addCheaterSuccess');
 						uni.navigateBack();
 					}
 				}).catch(err=>{
+					uni.hideLoading()
 					console.log('添加骗子失败！')
-				})
+				});
+				
 			},
+			
+			
+			/**
+			 * 上传骗子头像
+			 */
 			uploadIcon(rsp){
 				const _this = this;
 				this.url = rsp.path; //更新头像方式一
-				//选择照片
-                /* uni.chooseImage({
-                    count:1,
-                    sizeType:'compressed',
-                    success: (res) => {
-                        const imgsFile = res.tempFilePaths;
-						_this.url = imgsFile
-                        //上传
-                        const uper= uni.uploadFile({
-                            url: 'https://demo.hcoder.net/index.php?c=uperTest',
-                            filePath: imgsFile[0],
-                            name: 'file',
-                            // formData:{    },用于做令牌认证
-                            success: function(res1){
-                                console.log(res1.data)
-                            }
-                        })
-                        //上传进度更新的方法
-                        uper.onProgressUpdate((e)=>{
-                            console.log(e)
-                            _self.percent=e.progress
-                        })
-                    }
-                }) */
+				
+				let uploadData = {
+					filePath: _this.url
+				}
+				//上传图片
+				UploadCheaterIcon(uploadData).then(res=>{
+					if(res && res.data){
+						var resList = JSON.parse(res.data);
+						if(resList.length>1){
+							_this.data.photoUrl = resList[0].filePath
+							_this.data.photoThumbUrl = resList[0].filePath
+						}else{
+							console.log('上传骗子头像返回为空！');
+						}
+					}
+				}).catch(err=>{
+					console.log('上传骗子头像失败！')
+				})
+				
+				
 			},
 			
 		}

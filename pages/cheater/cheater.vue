@@ -8,8 +8,8 @@
 					<text class="del-btn yticon icon-iconfontshanchu1" @click="openDeleteCheater(item)"></text>
 				</view>
 				<view class="goods-box-single">
-					<!-- <image class="goods-img" v-if="item.imageUrl != null && item.imageUrl.thumbUrl != null" :src="item.imageUrl.thumbUrl" mode="aspectFill"></image> -->
-					<image class="goods-img" src="../../static/img/icon_cheater.png" mode="aspectFill"></image>
+					<image class="goods-img" v-if="item.imageUrl != null && item.imageUrl.thumbUrl != null && item.imageUrl.thumbUrl != ''" :src="item.imageUrl.thumbUrl" mode="aspectFill"></image>
+					<image v-else class="goods-img" src="../../static/img/icon_cheater.png" mode="aspectFill"></image>
 					<view class="right">
 						<!-- <text class="circle-box">{{item.meansName}}</text>
 						<text class="circle-box">{{item.caseCount}}</text>
@@ -51,7 +51,11 @@ export default {
 		};
 	},
 	created() {
-		this.loadData();
+		this.loadData('refresh');
+		uni.showLoading({
+		    title: '加载中...',
+		    mask: true // 默认遮罩出现可以继续操作
+		});
 	},
 	onPageScroll(e) {
 		//兼容iOS端下拉时顶部漂移
@@ -63,6 +67,7 @@ export default {
 	},
 	//下拉刷新
 	onPullDownRefresh() {
+		this.currentPage = 1;
 		this.loadData('refresh');
 	},
 	//加载更多

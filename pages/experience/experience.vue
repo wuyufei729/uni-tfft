@@ -5,8 +5,8 @@
 				<view class="tripItem">
 					<view class="time">{{item.startDateTime}}</view>
 					<view class="title">
-						<!-- <image :src="item.imageUrl.thumbUrl"></image> -->
-						<image src="../../static/missing-face.png"></image>
+						<image v-if="item.imageUrl!=null && item.imageUrl.thumbUrl != null && item.imageUrl.thumbUrl != ''" :src="item.imageUrl.thumbUrl"></image>
+						<image v-else src="../../static/missing-face.png"></image>
 						<text>{{item.name}}</text>
 						<text class="money">受骗金额<text>￥{{item.amount}}</text></text>
 					</view>
@@ -46,7 +46,7 @@ export default {
 		};
 	},
 	created() {
-		this.loadData();
+		this.loadData('refresh');
 	},
 	onPageScroll(e) {
 		//兼容iOS端下拉时顶部漂移
@@ -58,6 +58,7 @@ export default {
 	},
 	//下拉刷新
 	onPullDownRefresh() {
+		this.currentPage = 1;
 		this.loadData('refresh');
 	},
 	//加载更多

@@ -45,8 +45,8 @@
 					</view>
 					<scroll-view scroll-x class="h-list">
 						<view class="item" v-for="(item,i) in data.cheaters" :key="i">
-							<!-- <image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553105186633&di=c121a29beece4e14269948d990f9e720&imgtype=0&src=http%3A%2F%2Fimg004.hc360.cn%2Fm8%2FM04%2FDE%2FDE%2FwKhQplZ-QteEBvsbAAAAADUkobU751.jpg" mode="aspectFill"></image> -->
-							<image src="../../static/img/icon_cheater_active.png" mode="aspectFill"></image>
+							<image v-if="item.imageUrl != null && item.imageUrl.thumbUrl != null && item.imageUrl.thumbUrl != ''" :src="item.imageUrl.thumbUrl" mode="aspectFill"></image>
+							<image v-else src="../../static/img/icon_cheater_active.png" mode="aspectFill"></image>
 							<text class="">{{item.name}}</text>
 						</view>
 						<view class="item add-more" @click="openAddCheater()">

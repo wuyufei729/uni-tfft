@@ -15,9 +15,9 @@
 					<view class="right">
 						<view>内容：{{ item.process}}</view>
 						<view>转账记录：</view>
-						<scroll-view scroll-x class="image-list">
+						<scroll-view scroll-x class="image-list" v-if="item.evidenceImageUrls != null && item.evidenceImageUrls.length>0">
 							<view class="item" v-for="(imgItem,i) in item.evidenceImageUrls" :key="i">
-								<image :src="imgItem" mode="aspectFill" @click="$viewImage(imgItem)"></image>
+								<image :src="imgItem.thumbUrl" mode="aspectFill" @click="$viewImage(imgItem.thumbUrl)"></image>
 							</view>
 						</scroll-view>
 					</view>
@@ -58,7 +58,7 @@
 			const _this = this;
 			if(options != null && options.cheaterId != null){
 				this.cheaterId = options.cheaterId;
-				this.loadData();
+				_this.loadData('refresh');
 			}
 			
 			this.$eventBus.$on('refreshCheaterProcessList', function (data) {
