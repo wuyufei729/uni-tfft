@@ -25,6 +25,7 @@
 			<!-- #endif -->
 			</view>
 			<view class="bottom" v-else>
+				<move-verify v-if="isShowVerify" @result='verifyResult' ref="verifyElement"></move-verify>
 				<view class="input-phone">
 					<view class="ele-p"><input type="number" placeholder="手机号" v-model="phoneNum" /></view>
 					<view class="get-code">
@@ -48,7 +49,11 @@
 import Api_Urls from '../../api/Api_Urls.js'
 import {UserLogin,GetVerifyCode,VerifyCode, CheckUserPhoneNumIsValide} from '@/api/modules/user.js'
 import {AddScene} from '@/api/modules/scene.js'
+import moveVerify from "@/components/helang-moveVerify/helang-moveVerify.vue"
 export default {
+	components:{
+		"move-verify": moveVerify
+	},
 	data() {
 		return {
 			phoneCode: null, //输入的验证码
@@ -65,6 +70,10 @@ export default {
 			data: null, //授权信息字段
 			wechartCode: null,//微信授权code
 			isShowScanqr: false,
+			
+			//滑动验证sss
+			resultData:{},
+			isShowVerify: true,
 		};
 	},
 	onLoad() {
@@ -282,6 +291,7 @@ export default {
 							fail(res) {
 								//uni.hideLoading();
 								_this.isShowWeChartAuth = true;
+								
 								console.log(res);
 							}
 						});
@@ -310,6 +320,23 @@ export default {
 				}
 				this.seconds -= 1;
 			}, 1000);
+		},
+		
+		/* 校验结果回调函数 */
+		verifyResult(res){
+			console.log(res);
+			if(res != null && res.flag){
+				setTimeout(()=>{
+					this.isShowVerify = false;
+				},1000)
+			}
+			this.resultData = res;
+		},
+		/* 校验插件重置 */
+		verifyReset(){
+			this.$refs.verifyElement.reset();
+			/* 删除当前页面的数据 */
+			this.resultData = {};
 		}
 	}
 };
